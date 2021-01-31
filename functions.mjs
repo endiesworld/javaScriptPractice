@@ -1,4 +1,7 @@
+import ask from "./myModule.mjs" ;
 console.log("//********") ;
+
+ask("is this a module ?") ;
 
 const ifElse = (condition, isTrue, isFalse) => {
   return condition ? isTrue() : isFalse();

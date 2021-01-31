@@ -38,73 +38,35 @@ _.map =  function(list, callBack ){
 
 console.log("********\\") ;
 
-const newDevelopment = [
-    {
-        name: 'Miss Scarlet',
-        present: true,
-        rooms: [
-            {kitchen: false},
-            {ballroom: false},
-            {conservatory: true},
-            {'dining room': true},
-            {'billiard room': false},
-            {library: true}
-        ]
-    },
-    {
-        name: 'Reverend Green',
-        present: true,
-        rooms: [
-            {kitchen: true},
-            {ballroom: false},
-            {conservatory: false},
-            {'dining room': false},
-            {'billiard room': true},
-            {library: false}
-        ]
-    },
-    {
-        name: 'Colonel Mustard',
-        present: true,
-        rooms: [
-            {kitchen: false},
-            {ballroom: false},
-            {conservatory: true},
-            {'dining room': false},
-            {'billiard room': true},
-            {library: false}
-        ]
-    },
-    {
-        name: 'Professor Plum',
-        present: true,
-        rooms: [
-            {kitchen: true},
-            {ballroom: false},
-            {conservatory: false},
-            {'dining room': true},
-            {'billiard room': false},
-            {library: false}
-        ]
-    }
-];
-
-const roomsFilter = value => value.rooms ;
-
-const rooms = _.filter(newDevelopment, roomsFilter) ;
-
-console.log("rooms: ", rooms) ;
-
-// const roomsWithFalseValue = (accumulator, currentValue) => {
-//   for (value in currentValue) {
-//     if(!accumulator[value.])
-//    accumulator.push(currentValue)
-//   }
-// }
-
 let newArray = [2,3, 5] ;
 
 let myReducerFunction = (value, accum) => value + accum ;
 
 const sumOfArray = _.reduce(newArray, myReducerFunction , 0) ;
 console.log("Sum of array is: ", sumOfArray) ;
+
+//Common element filter function among input arrays
+function intersection(...arrays) {
+  let parentArrays = arrays ;
+  let samplingArrayElement = arrays[0] ;
+  let commonElement = [] ;
+  
+  const samplingFunction = function (valueFromReduce, currentValueindex, accumulatorFromReduce){
+    let commonElementCount = 0 ;
+    for(let parentArrayIndex = 1 ; parentArrayIndex < parentArrays.length ; parentArrayIndex++){
+      if(parentArrays[parentArrayIndex].includes(valueFromReduce)){
+        commonElementCount = commonElementCount + 1 ;
+      }
+      else{
+        break ;
+      }
+    }
+    if(commonElementCount === parentArrays.length - 1){
+      accumulatorFromReduce.push(valueFromReduce)
+    }
+    return accumulatorFromReduce ;
+  }
+  
+  commonElement = _.reduce(samplingArrayElement, samplingFunction, commonElement)
+  return commonElement ;
+}
